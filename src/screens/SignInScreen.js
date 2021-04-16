@@ -6,7 +6,7 @@ export default SignInScreen = () => {
     return (
 
         <View style = {styles.container}>
-            <text>Sign In</text>
+            <Text>Sign In</Text>
         </View>
 
     )
@@ -18,8 +18,8 @@ const styles = StyleSheet.create({
 
     container: {
         flex: 1,
-        justifyContent: "Center",
-        alignItems: "Center"
+        justifyContent: "center",
+        alignItems: "center"
 
     }
 

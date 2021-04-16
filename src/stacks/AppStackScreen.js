@@ -1,10 +1,10 @@
 import React from "react";
-import {createStackNavigator} from '@reac-navigation/stack'
+import {createStackNavigator} from '@react-navigation/stack'
 
 import AuthStackScreens from './AuthStackScreens'
-const AppStack = createStackNavigator();
 
 export default AppStackScreens = () => {
+    const AppStack = createStackNavigator();
 
     return(
 

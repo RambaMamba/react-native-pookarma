@@ -6,7 +6,7 @@ export default SignUpScreen = () => {
     return (
 
         <View style = {styles.container}>
-            <text>Sign Up</text>
+            <Text>Sign Up</Text>
         </View>
 
     )
@@ -18,8 +18,8 @@ const styles = StyleSheet.create({
 
     container: {
         flex: 1,
-        justifyContent: "Center",
-        alignItems: "Center"
+        justifyContent: "center",
+        alignItems: "center"
 
     }
 
