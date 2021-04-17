@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import Text from '../componenets/Text'
-
+import Text from '../componenets/Text';
+import LottieView from 'lottie-react-native';
 
 export default LoadingScreen = () => {
 
@@ -9,6 +9,14 @@ export default LoadingScreen = () => {
 
         <Container>
             <Text title>DOGE</Text>
+             {/*
+            <LottieView>
+                source={require("../../assets/loading.gif")} 
+                autoPlay 
+                loop
+                style={{ width:"100%" }}  
+            </LottieView>
+             */}
         </Container>
 
     );
