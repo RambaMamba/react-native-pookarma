@@ -45,7 +45,6 @@ export default SignUpScreen = ({navigation}) => {
     };
 
     const AddProfilePhoto = async() => {
-        console.log("ASDADA");
         const status = await getPermission()
 
         if(status !== "granted"){
@@ -65,9 +64,17 @@ export default SignUpScreen = ({navigation}) => {
             </Main>
 
             <ProfilePhotoContainer onPress={AddProfilePhoto}>
-                <DefaultProfilePhoto>
-                    <AntDesign name="plus" size={24} color = "ffffff"/>
+                {profilePhoto ? (
+                    
+                    <ProfilePhoto  source={{uri: profilePhoto}} />
+                    
+                ):(
+
+                <DefaultProfilePhoto onPress={AddProfilePhoto}> 
+                        <AntDesign name="plus" size={24} color = "ffffff" onPress={AddProfilePhoto}/>
                 </DefaultProfilePhoto>
+
+                )}
 
             </ProfilePhotoContainer>
 
@@ -184,22 +191,31 @@ const SignIn = styled.TouchableOpacity`
 
 
 `;
+const ProfilePhoto = styled.Image`
+    borderRadius: 40;
+    flex:1;
+`;
 
-const ProfilePhotoContainer = styled.View`
+
+const ProfilePhotoContainer = styled.TouchableOpacity`
     background-color: #964B00;
     width: 80px;
     height: 80px;
-    border-radius: 540px;
+    border-radius: 40px;
     align-self: center;
     margin-top: 40px;
 `;
 
-const DefaultProfilePhoto = styled.View`
+const DefaultProfilePhoto = styled.TouchableOpacity`
     align-items: center;
     justify-content: center;
     flex:1;
 `;
 
+const EE = styled.View`
+    border-radius: 40px;
+
+`;
 
 const Loading = styled.ActivityIndicator.attrs(props => ({ 
 
