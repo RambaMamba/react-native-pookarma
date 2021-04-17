@@ -1,9 +1,12 @@
-import React from "react";
+import React, {useState} from "react";
 import styled from "styled-components";
 import Text from '../componenets/Text';
 
 
-export default SignInScreen = () => {
+export default SignInScreen = ({navigation}) => {
+    const [email, setEmail] = useState();
+    const[password, setPassword] = useState();
+    const[loading, setLoading] = useState(false);
 
     return (
 
@@ -20,6 +23,8 @@ export default SignInScreen = () => {
                     autoCorrect={false} 
                     autoFocus = {true}
                     keyboardType = "email-address"
+                    onChangeText={email => setEmail(email.trim())}
+                    value = {email}
                     />
                 </AuthContainer>
 
@@ -28,18 +33,24 @@ export default SignInScreen = () => {
                     <AuthField autoCapitalize="none" 
                     autoCompleteType="password" 
                     autoCorrect={false} 
-                    autoFocus = {true}
                     secureTextEntry={true}
+                    onChangeText={password => setPassword(password.trim())}
+                    value = {password}
                     />
                 </AuthContainer>
 
             </Auth>
 
-            <SignInContainer>
-                <Text bold center color="#ffffff">Sign In</Text>
+            <SignInContainer disabled={loading}>
+                {loading ? (
+                    <Loading />
+                ):(
+                    <Text bold center color="#ffffff">Sign In</Text>
+                )}
+                    
             </SignInContainer>
 
-            <SignUp>
+            <SignUp onPress={() => navigation.navigate("SignUp")}>
                 <Text small center>
                     New to Doge?{" "}
                     <Text color="#964B00" bold>
@@ -61,7 +72,7 @@ const Container = styled.View`
 `;
 
 const Main = styled.View`
-    margin-top: 100px;
+    margin-top: 75px;
 
 `;
 
@@ -105,5 +116,12 @@ const SignUp = styled.TouchableOpacity`
 
 
 `;
+
+const Loading = styled.ActivityIndicator.attrs(props => ({ 
+
+    color: "#ffffff",
+    size: "small"
+
+ }))``; 
 
 const StatusBar = styled.StatusBar``;
