@@ -64,12 +64,11 @@ export default SignUpScreen = ({navigation}) => {
     const signUp = async() => {
         setLoading(true);
         const user = {username, email, password, profilePhoto};
-        console.log(username);
-        console.log("asdasd");
         try{
             console.log(username);
+            console.log(profilePhoto);
             const createdUser = await firebase.createUser(user);
-            setUser({...createdUser, isLoggedIn: false});
+            setUser({...createdUser, isLoggedIn:true});
         }catch(error){
             console.log("error @signup ", error);
         }finally{
@@ -92,7 +91,7 @@ export default SignUpScreen = ({navigation}) => {
                 ):(
 
                 <DefaultProfilePhoto onPress={AddProfilePhoto}> 
-                        <AntDesign name="plus" size={24} color = "ffffff" onPress={AddProfilePhoto}/>
+                        <AntDesign name="plus" size={24} color = "#ffffff" onPress={AddProfilePhoto}/>
                 </DefaultProfilePhoto>
 
                 )}
@@ -240,7 +239,7 @@ const EE = styled.View`
 
 const Loading = styled.ActivityIndicator.attrs(props => ({ 
 
-    color: "#FFFFFF",
+    color: "#fff",
     size: "small"
 
  }))``; 
