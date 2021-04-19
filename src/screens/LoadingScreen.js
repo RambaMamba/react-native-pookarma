@@ -3,12 +3,34 @@ import styled from 'styled-components';
 import Text from '../componenets/Text';
 import LottieView from 'lottie-react-native';
 import {UserContext} from "../context/UserContext"
+import { FirebaseContext } from "../context/FirebaseContext";
 
 export default LoadingScreen = () => {
     const [_, setUser] = useContext(UserContext);
+    const firebase = useContext(FirebaseContext);
+
     useEffect(() =>{
         setTimeout(async () => {
-            setUser((state) => ({ ...state, isLoggedIn: false}));
+
+            const user = firebase.getCurrentUser()
+            if(user){
+                const userInfo = await firebase.getUserInfo(user.uid);
+                setUser({
+
+                    isLoggedIn: true,
+                    email: userInfo.email,
+                    uid: user.uid,
+                    username: userInfo.username,
+                    profilePhotoUrl: userInfo.profilePhotoUrl
+
+                })
+            } else{
+
+                setUser((state) => ({ ...state, isLoggedIn: false}));
+
+            }
+
+
         }, 500);
 
     }, [])
@@ -16,14 +38,6 @@ export default LoadingScreen = () => {
 
         <Container>
             <Text title>DOGE</Text>
-             {/*
-            <LottieView>
-                source={require("../../assets/loading.gif")} 
-                autoPlay 
-                loop
-                style={{ width:"100%" }}  
-            </LottieView>
-             */}
         </Container>
 
     );
