@@ -1,7 +1,6 @@
 import React, { useContext, useEffect } from 'react';
 import styled from 'styled-components';
 import Text from '../componenets/Text';
-import LottieView from 'lottie-react-native';
 import {UserContext} from "../context/UserContext"
 import { FirebaseContext } from "../context/FirebaseContext";
 
