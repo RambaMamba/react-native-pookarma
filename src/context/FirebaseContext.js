@@ -109,6 +109,18 @@ const Firebase = {
 
     },
 
+    logOut: async () => {
+        try{
+            await firebase.auth().signOut();
+            return true;
+        }
+        catch(error){
+
+            console.log("error @ logout ", error)
+        }
+        return false;
+    }
+
 
 };
 
