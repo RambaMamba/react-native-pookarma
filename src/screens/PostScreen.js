@@ -6,13 +6,45 @@ import * as Permissions from "expo-permissions";
 import * as ImagePicker from "expo-image-picker";
 import {AntDesign} from '@expo/vector-icons';
 import {ScrollView} from 'react-native';
+import { AsyncStorage } from '@react-native-community/async-storage';
+
+_storeData = async (key, info) => {
+    try {
+      await AsyncStorage.setItem(
+        key,
+        info
+      );
+    } catch (error) {
+      console.log("Error @store async data, ", error)
+    }
+  };
+
+  _retrieveData = async () => {
+    try {
+      const value = await AsyncStorage.getItem('TASKS');
+      if (value !== null) {
+        return value;
+    }
+    } catch (error) {
+        console.log("Error @getasyncstorage, ", error)
+    }
+  };
+
 
 export default PostScreen = () => {
 
     const[Photo, SetPhoto] = useState();
     const [post, setPost] = useState();
 
-
+    const PostAll = async () => {
+        try{
+            oldData = _retrieveData;
+            console.log(oldData);
+        }catch(error){
+            alert(error.message);
+        }
+    }
+    
     const getPermission = async() =>{
 
         if(Platform.OS !== 'web'){
@@ -59,8 +91,18 @@ export default PostScreen = () => {
 
     return (
         <Container>
+            <ScrollView>
              <Main>
                 <Text title semi center> Post your pets.</Text>
+
+                
+                
+                <CaptionContainer>
+                    <CaptionTittle>Caption</CaptionTittle>
+                    <FieldInfo onChangeText={post => setPost(post)}
+                    value = {post}
+                    />
+                </CaptionContainer>
 
                 <ImagesContainer onPress={AddPhoto}>
                     {Photo ? (
@@ -76,19 +118,10 @@ export default PostScreen = () => {
                     )}
 
                 </ImagesContainer>
-                
-                <CaptionContainer>
-                    <CaptionTittle>Caption</CaptionTittle>
-                    <FieldInfo onChangeText={post => setPost(post)}
-                    value = {post}
-                    />
-                </CaptionContainer>
-
-
-                <ButtonContainer><Text semi large center>Cancel</Text></ButtonContainer>
-                <ButtonContainer><Text semi large center>Post</Text></ButtonContainer>
+                <ButtonContainer onPress={PostAll}><Text semi large center>Post</Text></ButtonContainer>
 
             </Main>
+            </ScrollView>
         </Container>
 
     );
@@ -112,6 +145,7 @@ const FieldInfo = styled.TextInput`
     border-bottom-color : #8e93a1;
     border-bottom-width : 0.5px;
     height : 48px;
+    width: 300px;
 
 `;
 
@@ -147,7 +181,7 @@ const ButtonContainer = styled.TouchableOpacity`
     margin: 0 32px;
     margin-top: 20px;
     height: 48px;
-    width: 150px;
+    width: 300px;
     align-items: center;
     justify-content: center;
     background-color: #997950;
