@@ -50,7 +50,6 @@ const PostContainer = styled.View`
     padding: 8px;
 `;
 const PostHeaderContainer = styled.View`
-
     flex-direction: row;
     margin-bottom: 2px;
     align-items: center;
@@ -66,7 +65,6 @@ const Username = styled.View`
 `;
 const Post = styled.View`
     margin-left: 64px;
-
 `;
 const PostPhoto = styled.Image`
     width: 100%;
